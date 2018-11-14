@@ -1,9 +1,0 @@
-[Unit]
-Description=Restartd Service
-After=containerd.service
-
-[Service]
-ExecStart=/usr/local/bin/restartd
-
-[Install]
-WantedBy=multi-user.target

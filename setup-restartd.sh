@@ -210,16 +210,6 @@ cat <<EOF >docker-profile
           "type" : "bind"
        },
        {
-          "options" : [
-             "rbind",
-             "rw",
-             "rshared"
-          ],
-          "source" : "/var/lib/docker",
-          "destination" : "/var/lib/docker",
-          "type" : "bind"
-       },
-       {
           "destination" : "/sys/fs/cgroup",
           "type" : "bind",
           "options" : [
@@ -263,17 +253,7 @@ cat <<EOF >docker-profile
           ],
           "type" : "bind",
           "destination" : "/etc/group"
-       },
-       {
-          "source" : "/usr/local/sbin/runc",
-          "options" : [
-             "rbind",
-             "ro"
-          ],
-          "type" : "bind",
-          "destination" : "/usr/local/sbin/runc"
        }
- 
     ],
     "linux" : {
        "namespaces" : [
@@ -290,7 +270,7 @@ sudo mv -f docker-profile /etc/restartd/profiles/docker.json
 
 cat <<EOF >dockerd-service
 {
-    "image": "docker.io/crosbymichael/dind:latest",
+    "image": "docker.io/library/docker:18.09-dind",
     "profile": "docker",
     "process" : {
        "cwd" : "/",
@@ -311,7 +291,7 @@ cat <<EOF >dockerd-service
        },
        "env" : [
           "DOCKER_CHANNEL=edge",
-          "DOCKER_VERSION=18.01.0-ce",
+          "DOCKER_VERSION=18.09.0",
           "DIND_COMMIT=3b5fac462d21ca164b3778647420016315289034"
        ]
     }
